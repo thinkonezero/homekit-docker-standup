@@ -31,6 +31,7 @@ services:
       options:
         max-file: '${LOG_FILE_NUM}'
         max-size: '${LOG_FILE_SIZE}'
+    network_mode: 'host'
     ports:
       - '${HOMEBRIDGE_PORT}:8581'
     environment:
