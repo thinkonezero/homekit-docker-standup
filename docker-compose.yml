@@ -32,7 +32,8 @@ services:
         max-file: '${LOG_FILE_NUM}'
         max-size: '${LOG_FILE_SIZE}'
     ports:
-      - '${HOMEBRIDGE_PORT}:8581'
+      - '${HOMEBRIDGE_UI_PORT}:8581'
+      - '${HOMEBRIDGE_PORT}:51509'
     environment:
       - ENABLE_AVAHI=1
       - TZ=${TZ}
