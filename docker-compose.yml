@@ -37,6 +37,7 @@ services:
       - '${HOMEBRIDGE_PORT}:51509'
     environment:
       - ENABLE_AVAHI=1
+      - HOMEBRIDGE_CONFIG_UI_PORT:${HOMEBRIDGE_UI_PORT}
       - TZ=${TZ}
       - PUID=${PUID}
       - PGID=${PGID}
