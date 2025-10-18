@@ -23,7 +23,7 @@ services:
   # Home Automation
   # ----------------------------------------
   homebridge:
-    image: oznu/homebridge:latest
+    image: homebridge/homebridge:latest
     container_name: homebridge
     restart: unless-stopped
     logging:
@@ -31,11 +31,13 @@ services:
       options:
         max-file: '${LOG_FILE_NUM}'
         max-size: '${LOG_FILE_SIZE}'
-    network_mode: 'host'
+    ports:
+      - '${HOMEBRIDGE_PORT}:8581'
     environment:
+      - ENABLE_AVAHI=1
       - TZ=${TZ}
       - PUID=${PUID}
       - PGID=${PGID}
     volumes:
-      - '${SYNOLOGY_BASE_DOCKER_PATH}/homebridge:/homebridge'
+      - '${BASE_DOCKER_PATH}/homebridge:/homebridge'
       - '/etc/localtime:/etc/localtime:ro'
