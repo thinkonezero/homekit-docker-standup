@@ -44,3 +44,26 @@ services:
     volumes:
       - '${BASE_DOCKER_PATH}/homebridge:/homebridge'
       - '/etc/localtime:/etc/localtime:ro'
+
+# ----------------------------------------
+  # MATTERBRIDGE
+  # Home Automation
+  # ----------------------------------------
+  matterbridge:
+    image: luligu/matterbridge:latest
+    container_name: matterbridge
+    restart: unless-stopped
+    network_mode: host
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '${LOG_FILE_NUM}'
+        max-size: '${LOG_FILE_SIZE}'
+    environment:
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+    volumes:
+      - "${BASE_DOCKER_PATH}/matterbridge/plugins:/root/Matterbridge"           # Mounts the Matterbridge plugin directory
+      - "${BASE_DOCKER_PATH}/matterbridge/config:/root/.matterbridge"           # Mounts the Matterbridge storage directory
+      - '/etc/localtime:/etc/localtime:ro'
