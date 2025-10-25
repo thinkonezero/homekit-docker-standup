@@ -32,9 +32,6 @@ services:
       options:
         max-file: '${LOG_FILE_NUM}'
         max-size: '${LOG_FILE_SIZE}'
-    ports:
-      - '${HOMEBRIDGE_UI_PORT}:8581'
-      - '${HOMEBRIDGE_PORT}:51509'
     environment:
       - ENABLE_AVAHI=1
       - HOMEBRIDGE_CONFIG_UI_PORT:${HOMEBRIDGE_UI_PORT}
@@ -69,7 +66,7 @@ services:
       - '/etc/localtime:/etc/localtime:ro'
 
   # ----------------------------------------
-  # HOMEBRIDGE
+  # SCRYPTED
   # Home Automation
   # ----------------------------------------
   scrypted:
