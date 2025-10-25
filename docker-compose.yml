@@ -45,7 +45,7 @@ services:
       - '${BASE_DOCKER_PATH}/homebridge:/homebridge'
       - '/etc/localtime:/etc/localtime:ro'
 
-# ----------------------------------------
+  # ----------------------------------------
   # MATTERBRIDGE
   # Home Automation
   # ----------------------------------------
@@ -66,4 +66,26 @@ services:
     volumes:
       - "${BASE_DOCKER_PATH}/matterbridge/plugins:/root/Matterbridge"           # Mounts the Matterbridge plugin directory
       - "${BASE_DOCKER_PATH}/matterbridge/config:/root/.matterbridge"           # Mounts the Matterbridge storage directory
+      - '/etc/localtime:/etc/localtime:ro'
+
+  # ----------------------------------------
+  # HOMEBRIDGE
+  # Home Automation
+  # ----------------------------------------
+  scrypted:
+    image: ghcr.io/koush/scrypted:latest
+    container_name: scrypted
+    restart: unless-stopped
+    network_mode: host
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '${LOG_FILE_NUM}'
+        max-size: '${LOG_FILE_SIZE}'
+    environment:
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+    volumes:
+      - '${BASE_DOCKER_PATH}/scrypted:/server/volume'
       - '/etc/localtime:/etc/localtime:ro'
