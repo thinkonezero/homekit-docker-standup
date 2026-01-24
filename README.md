@@ -47,7 +47,7 @@ HOMEBRIDGE_UI_PORT=
 
 If this project has helped you in anyway, and you'd like to say thanks...
 
-[![Donate](https://img.shields.io/badge/Donate-SquareCash-brightgreen.svg)](https://cash.me/$phikai)
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G71SUNID)
 
 ---
 
