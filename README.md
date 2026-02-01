@@ -1,51 +1,57 @@
 # Homekit Docker Standup
 
+This is a docker-compose configuration to run home automation and bridge services on a Synology NAS, allowing you to connect non-HomeKit devices to Apple Home.
+
+## 🚀 Services
+
+| Service | Description |
+| :--- | :--- |
+| [Homebridge](https://homebridge.io/) | Connects non-HomeKit Smart Home devices to Apple HomeKit. |
+| [Matterbridge](https://github.com/Luligu/matterbridge) | A bridge that exposes non-Matter devices to HomeKit via the Matter protocol. |
+| [Scrypted](https://www.scrypted.app/) | High-performance video integration for cameras into HomeKit (HKSV). |
+
+## 📋 Prerequisites
+
+- Synology NAS (DSM 7.x recommended)
+- [Git](https://git-scm.com/) installed via SynoCommunity
+- [Docker / Container Manager](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+## 🛠️ Setup
+
+1. **Clone the project**:
+   ```bash
+   git clone https://github.com/phikai/homekit-docker-standup.git
+   ```
+2. **Environment Configuration**:
+   - Copy `sample.env` to `.env`.
+   - Update `SYNOLOGY_BASE_DOCKER_PATH` to your docker root (e.g., `/volume1/docker`).
+   - Set your `PUID` and `PGID` (run `id` via SSH).
+3. **Deploy**:
+   ```bash
+   docker compose up -d
+   ```
+
+## 🌐 Accessing Apps
+
+> **Note**: These services run in `host` network mode for better device discovery.
+
+| App | Default URL |
+| :--- | :--- |
+| **Homebridge** | `http://<NAS_IP>:${HOMEBRIDGE_UI_PORT}` |
+| **Matterbridge** | `http://<NAS_IP>:8283` |
+| **Scrypted** | `https://<NAS_IP>:10443` |
+
+## ⚙️ Environment Variables
+
+Common variables used across services:
+- `PUID/PGID`: Local user/group IDs.
+- `TZ`: Your timezone (e.g., `Europe/London`).
+- `LOG_FILE_NUM/SIZE`: Settings for Docker log rotation.
+
 ---
-This is a simple docker-compose configuration to run some home automation apps on a Synology NAS.
 
-## Services
-
-- [Homebridge](https://homebridge.io/) - for connecting IOT Devices to Homekit
-- [Matterbirdge](https://github.com/Luligu/matterbridge) - for connecting IOT Devices with Matter Support to Homekit
-- [Scrypted](https://www.scrypted.app/) - for connecting Cameras to Homekit
-
-## Install Instructions
-
-### Prerequisites
-
-- Synology NAS
-- [Git](https://git-scm.com/)
-- [Docker](https://www.docker.com/)
-- [Docker-Compose](https://docs.docker.com/compose/)
-
-### Setup
-
-1. Clone this project
-1. Copy `sample.env` to `.env` and update variables as appropriate
-1. Run `docker-compose up -d` to start the services
-
-## Accessing Apps
-
-1. Homebridge will be available at the IP Address on the `HOMEBRIDGE_UI_PORT`, `http://192.168.x.x:58581`
-1. Matterbridge will be available at the IP Adddress of your host on port `8283`, `http://192.168.x.x:8283`
-1. Scrypted will be available at the IP Adddress of your host on port `10443`, `https://192.168.x.x:10443`
-
-## Environment File
-
-```plaintext
-LOCALUSER=
-PUID=
-PGID=
-LOG_FILE_NUM=5
-LOG_FILE_SIZE=10m
-TZ=
-SYNOLOGY_BASE_DOCKER_PATH=/volume1/docker
-HOMEBRIDGE_UI_PORT=
-```
-
----
-
-If this project has helped you in anyway, and you'd like to say thanks...
+If this project has helped you, please consider supporting my work!
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G71SUNID)
 
@@ -53,10 +59,4 @@ If this project has helped you in anyway, and you'd like to say thanks...
 
 # Disclaimer
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY.
