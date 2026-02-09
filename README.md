@@ -21,7 +21,7 @@ This is a docker-compose configuration to run home automation and bridge service
 
 1. **Clone the project**:
    ```bash
-   git clone https://github.com/phikai/homekit-docker-standup.git
+   git clone https://gitlab.com/thinkonezero/homekit-docker-standup.git
    ```
 2. **Environment Configuration**:
    - Copy `sample.env` to `.env`.
@@ -29,7 +29,7 @@ This is a docker-compose configuration to run home automation and bridge service
    - Set your `PUID` and `PGID` (run `id` via SSH).
 3. **Deploy**:
    ```bash
-   docker compose up -d
+   docker-compose up -d
    ```
 
 ## 🌐 Accessing Apps
