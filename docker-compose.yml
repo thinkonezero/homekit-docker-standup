@@ -41,6 +41,12 @@ services:
     volumes:
       - '${BASE_DOCKER_PATH}/homebridge:/homebridge'
       - '/etc/localtime:/etc/localtime:ro'
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8581 || exit 1"]
+      interval: 1m
+      timeout: 5s
+      retries: 3
+      start_period: 30s
 
   # ----------------------------------------
   # MATTERBRIDGE
@@ -64,6 +70,12 @@ services:
       - "${BASE_DOCKER_PATH}/matterbridge/plugins:/root/Matterbridge"           # Mounts the Matterbridge plugin directory
       - "${BASE_DOCKER_PATH}/matterbridge/config:/root/.matterbridge"           # Mounts the Matterbridge storage directory
       - '/etc/localtime:/etc/localtime:ro'
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8081 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
 
   # ----------------------------------------
   # SCRYPTED
@@ -86,3 +98,9 @@ services:
     volumes:
       - '${BASE_DOCKER_PATH}/scrypted:/server/volume'
       - '/etc/localtime:/etc/localtime:ro'
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:1080/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
